@@ -1,0 +1,138 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    transition: 2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* .navbar-logo img {
+    height: 40px;
+  } */
+  .cart-count{
+    position:relative;
+    top:"5%";
+    right:"0%";
+    background-color:"white";
+    padding-left: "7px";
+    padding-right:"7px";
+    border-radius:"100%";
+  }
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  .nav-item {
+    margin: 0 1rem;
+  }
+  
+  .nav-links {
+    text-decoration: none;
+    color: #fbb545;
+    font-weight: bold;
+    
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links:hover {
+    color: #ff9d00;
+    
+  }
+  
+  .nav-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn {
+    background-color: #ff9d00;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #ffffff;
+    color: #ff9d00;
+    transition: 1s;
+    border: 2px solid #ff9d00;
+    
+  }
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 1rem;
+    background-color: #ff9d00;
+  }
+
+  .nav-menu.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    overflow: hidden;
+  }
+
+  .nav-menu.active .nav-item {
+    margin: 1rem 0;
+  }
+  @media (max-width: 768px) {
+    .nav-menu {
+      display: none;
+    }
+  
+    .nav-toggle {
+      display: block;
+    }
+  
+    .nav-buttons {
+      display: block;
+      /* padding: 10px; */
+      flex-direction: column;
+    }
+    .cart-count-div{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      width: 10%;
+    }
+  }
+
+
+  
