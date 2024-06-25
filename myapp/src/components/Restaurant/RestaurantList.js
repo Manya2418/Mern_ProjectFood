@@ -10,7 +10,7 @@ function RestaurantList() {
   const [loading,setLoading]=useState(true);
   useEffect(() => {
     setLoading(true)
-    axios.get('http://localhost:5000/restaurant')
+    axios.get('https://mernbackend-2-ebc9.onrender.com/restaurant')
       .then(response => {
         setRestaurants(response.data);
       })

@@ -6,7 +6,7 @@ const OrderCard = ({ order ,onRemove}) => {
 
     const handleRemoveOrder = async () => {
       try {
-        await axios.delete(`http://localhost:5000/order/delete?id=${order._id}`);
+        await axios.delete(`https://mernbackend-2-ebc9.onrender.com/order/delete?id=${order._id}`);
         onRemove(order._id);
         toast.success("Removed successful!")
         window.location.reload();

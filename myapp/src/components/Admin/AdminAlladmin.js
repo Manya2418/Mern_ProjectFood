@@ -24,7 +24,7 @@ const AdminAlladmin=()=> {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/admin/alladmin');
+                const response = await axios.get('https://mernbackend-2-ebc9.onrender.com/admin/alladmin');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);

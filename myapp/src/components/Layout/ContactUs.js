@@ -22,7 +22,7 @@ const ContactUs = () => {
         e.preventDefault();
     
         try {
-          await axios.post('http://localhost:5000/user/contact', formData);
+          await axios.post('https://mernbackend-2-ebc9.onrender.com/user/contact', formData);
           
           setFormData({ name: '', email: '', message: '' });
           toast.success('Message sent successfully');

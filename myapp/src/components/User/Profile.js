@@ -36,7 +36,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.put(`http://localhost:5000/user/update?userId=${userId}`, {
+        const response = await axios.put(`https://mernbackend-2-ebc9.onrender.com/user/update?userId=${userId}`, {
         name: name,
         email:email,
         phone:phone,

@@ -9,7 +9,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/user/forgotpassword', { email });
+      const response = await axios.post('https://mernbackend-2-ebc9.onrender.com/user/forgotpassword', { email });
       if (response.status === 200) {
         toast.success('Password reset email sent!');
       } else {

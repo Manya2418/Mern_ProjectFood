@@ -51,7 +51,7 @@ export const Cart = () => {
   const [loading,setLoading]=useState();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/restaurant')
+    axios.get('https://mernbackend-2-ebc9.onrender.com/restaurant')
       .then(response => {
         const names = response.data.reduce((acc, restaurant) => {
           acc[restaurant._id] = restaurant.name;
@@ -83,7 +83,7 @@ export const Cart = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:5000/order/orderdetails', orderData);
+      const response = await axios.post('https://mernbackend-2-ebc9.onrender.com/order/orderdetails', orderData);
       toast.success('Payment successful!');
       navigate('/user/welcome')
       console.log('Order created:', response.data);

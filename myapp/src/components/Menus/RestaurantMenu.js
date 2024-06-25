@@ -13,7 +13,7 @@ const RestaurantMenu = () => {
   
   useEffect(() => {
     setLoading(true)
-    axios.get(`http://localhost:5000/menus/${restaurantId}`)
+    axios.get(`https://mernbackend-2-ebc9.onrender.com/menus/${restaurantId}`)
       .then(response => {
         setMenuItems(response.data)})
       .catch(error => console.error('Error fetching menu:', error)).finally(setLoading(false))

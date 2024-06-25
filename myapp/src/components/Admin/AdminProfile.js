@@ -40,7 +40,7 @@ const AdminProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.put(`http://localhost:5000/admin/update?adminId=${adminId}`, {
+        const response = await axios.put(`https://mernbackend-2-ebc9.onrender.com/admin/update?adminId=${adminId}`, {
         name: name,
         email:email,
       },

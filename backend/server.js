@@ -22,6 +22,9 @@ app.use('/user',userRouter);
 app.use('/cart',cartRouter)
 app.use('/order',orderRouter)
 app.use('/admin',adminRouter) 
+app.get('/',(req,res)=>{
+  res.send("ker dikhaya")
+})
 
 
 app.listen(port, (req,res) => {
