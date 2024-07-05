@@ -4,7 +4,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Signup.css'; // Import the CSS file for styling
 import { Link } from 'react-router-dom';
+
+
 const Signup = () => {
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     const initialData={
         name: '',
         email: '',
@@ -129,14 +137,29 @@ const Signup = () => {
                 <label for="password">
                         Password
                     </label>
+                    <div style={{ position: 'relative' }}>
                     <input
-                        type="password"
+                        type={showPassword?"text":"password"}
                         name="password"
                         value={password}
                         onChange={onChange}
                         placeholder='Password'
+                        style={{ paddingRight: '30px' }}
                         required
                     />
+                    <span
+                    onClick={togglePasswordVisibility}
+                    style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer'
+                    }}
+                >
+                    <i className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
+                    </span>
+            </div>
                 </div>
                 <button type="submit">Signup</button>
             </form><br/>

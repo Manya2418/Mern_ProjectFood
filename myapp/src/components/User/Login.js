@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../store/userSlice';
 import { Toaster ,toast} from 'react-hot-toast';
+import Loader from '../Loader';
 
 const Login = () => {
     const initial={
@@ -13,13 +14,20 @@ const Login = () => {
         password: ''
     };
     const [formData, setFormData] = useState(initial);
-
+    const [loading,setLoading]=useState()
     const { email, password } = formData;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
+    
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+    
     useEffect(() => {
         const userData = JSON.parse(sessionStorage.getItem('userData'));
         if (userData && !isAuthenticated) {
@@ -29,6 +37,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true)
         try {
             const res = await axios.post('https://mernbackend-2-ebc9.onrender.com/user/login', formData);
             const userData={
@@ -46,9 +55,14 @@ const Login = () => {
             toast.error('Invalid Details');
             console.error(err);
             setFormData(initial)
+        }finally{
+            setLoading(false)
         }
     };
     
+    if(loading){
+        return <Loader/>
+    }
 
 
     return (
@@ -81,14 +95,29 @@ const Login = () => {
                 <label for="password">
                         Password
                     </label>
+                    <div style={{ position: 'relative' }}>
                     <input
-                        type="password"
+                        type={showPassword?"text":"password"}
                         name="password"
                         value={password}
-                        placeholder='Password'
                         onChange={onChange}
+                        placeholder='Password'
+                        style={{ paddingRight: '30px' }}
                         required
                     />
+                    <span
+                    onClick={togglePasswordVisibility}
+                    style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer'
+                    }}
+                >
+                    <i className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
+                    </span>
+            </div>
 
                 </div>
                 <p onClick={() => navigate('/user/forgotpassword')} style={{color:"#e68a00",cursor:"pointer"}}>Forgot Password</p><br/>

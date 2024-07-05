@@ -6,8 +6,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Loader';
 import {toast,Toaster} from 'react-hot-toast'
+import { loadStripe } from '@stripe/stripe-js';
 
-// const stripePromise = loadStripe("pk_test_51NmBxVSJm0EOvE96jDAKUOsep6pg3OfXGtTguyJdXCt0FFxOL8Ipho1HzbWtDVTUin5wJyEFX8jYwcmCrcHTx0gh00spEecMx7");
+
+const stripePromise = loadStripe("pk_test_51NmBxVSJm0EOvE96jDAKUOsep6pg3OfXGtTguyJdXCt0FFxOL8Ipho1HzbWtDVTUin5wJyEFX8jYwcmCrcHTx0gh00spEecMx7");
 
 export const Cart = () => {
   const items = useSelector((state) => state.cart);
@@ -18,6 +20,7 @@ export const Cart = () => {
   const userId = userData ? userData.user.id : null;
   const username=userData?userData.user.name:null;
   const userphone=userData?userData.user.phone:null;
+  const useremail=userData?userData.user.email:null;
   
   
   const handleRemove = (itemId) => {
@@ -51,6 +54,7 @@ export const Cart = () => {
   const [loading,setLoading]=useState();
 
   useEffect(() => {
+
     axios.get('https://mernbackend-2-ebc9.onrender.com/restaurant')
       .then(response => {
         const names = response.data.reduce((acc, restaurant) => {
@@ -73,22 +77,37 @@ export const Cart = () => {
     const orderData = {
       userId: userId, 
       userName:username,
-      userPhone:userphone,
       items: groupedItems,
       restaurantName: groupedItems.map(item => restaurantNames[item.restaurantId]).join(', '),
       totalPrice: totalPrice,
       discountedPrice: discountedPrice,
       discount: discount,
     };
-
     setLoading(true);
+
     try {
-      const response = await axios.post('https://mernbackend-2-ebc9.onrender.com/order/orderdetails', orderData);
-      toast.success('Payment successful!');
-      navigate('/user/welcome')
-      console.log('Order created:', response.data);
+      const respon = await axios.post('https://mernbackend-2-ebc9.onrender.com/order/orderdetails', orderData);
+
+      
+      // toast.success('Payment successful!');
+      // navigate('/user/welcome')
+      // console.log('Order created:', response.data);
+      // dispatch(clearCart());
+      // sessionStorage.removeItem('cart')
+
+      const response = await axios.post('http://localhost:5000/order/create-checkout-session', orderData);
+      const sessionId = response.data.id;
+
+      
       dispatch(clearCart());
       sessionStorage.removeItem('cart')
+      toast.success('Payment successful!');
+      
+      const stripe = await stripePromise;
+      const { error } = await stripe.redirectToCheckout({
+        sessionId,
+      });
+      
     } 
     catch (error) {
       console.error('Error creating order:', error);

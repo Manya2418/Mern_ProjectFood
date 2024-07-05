@@ -10,15 +10,31 @@ const RestaurantMenu = () => {
   const { restaurantId } = useParams();
   const [menuItems, setMenuItems] = useState([]);
   const [loading,setLoading]=useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+
   
   useEffect(() => {
     setLoading(true)
-    axios.get(`https://mernbackend-2-ebc9.onrender.com/menus/${restaurantId}`)
-      .then(response => {
-        setMenuItems(response.data)})
-      .catch(error => console.error('Error fetching menu:', error)).finally(setLoading(false))
+    const fetchData=async()=>{
+      try{
+        const response=await axios.get(`https://mernbackend-2-ebc9.onrender.com/menus/${restaurantId}`)
+        setMenuItems(response.data)
+      }catch(error){
+        console.error('Error fetching menu:', error)
+      }finally{setLoading(false)}
+    }
+    fetchData();
+      
   }, [restaurantId]);
   
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  const filteredMenuItems = searchTerm !== '' ?
+    menuItems.filter(menu =>
+      menu.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ) :
+    menuItems;
 
   if (loading) {
     return <Loader />;
@@ -26,8 +42,17 @@ const RestaurantMenu = () => {
 
   return (
     <div className="menu-list-container">
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search menu..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        <i class="fa-solid fa-magnifying-glass absolute right-2 top-5 text-yellow-500"></i>
+      </div>
       <div className="menu-list">
-        {menuItems.map(menu => (
+        {filteredMenuItems.map(menu => (
           <MenuCard key={menu._id} menu={menu} />
         ))}
       </div>

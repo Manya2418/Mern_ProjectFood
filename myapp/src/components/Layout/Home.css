@@ -171,16 +171,22 @@
 
 @media (max-width: 768px){
   .home-container{
-    margin-top: 20%;
+    margin-top: 30%;
+  }
+  .content{
+    position:relative;
+  }
+  .content h1{
+    font-size:x-large;
   }
   .home-page2{
     height: auto;
   }
-  .about-main{
-    flex-direction: column;
-  }
   .about-main1{
     width: 100%;
+    margin-top: 30%;
+    flex-direction: column;
+    
 
   }
   .about-main2{

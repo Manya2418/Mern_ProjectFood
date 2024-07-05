@@ -5,7 +5,7 @@ import { initializeAuth, logout } from '../../store/userSlice';
 import Animation from '../Animations/welcome.json'
 import Lottie from 'lottie-react'
 import { Toaster ,toast} from 'react-hot-toast';
-
+import '../Cart/Order.css'
 
 const Welcome = () => {
     const navigate=useNavigate();
@@ -46,7 +46,7 @@ const Welcome = () => {
         </div>
         <div className='order2'>
           <h1 class=" text-orange-500 font-bold font-serif text-xl">Hello {username}!</h1>
-           
+          <div className="order2_con" >
             <div style={{width:"100%",color:"rgba(0, 0, 0, 0.601)"}}>
             Dear {username},<br/>
             Thank you for choosing Manyawar! <br/><br/>We’re committed to delivering the freshest and tastiest meals right to your doorstep. Our team ensures top-quality ingredients, hygiene, and timely delivery from the best restaurants.
@@ -56,6 +56,7 @@ const Welcome = () => {
             Manyawar Team
             </div>
           <Lottie animationData={Animation} loop={true} autoplay={true} /></div>
+        </div>
         </div>
       <Toaster/>
     </>

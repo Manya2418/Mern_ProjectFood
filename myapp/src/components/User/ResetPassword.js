@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
+import Loader from '../Loader';
 
 const ResetPassword = () => {
   const { token } = useParams();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading,setLoading]=useState()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +17,7 @@ const ResetPassword = () => {
      toast.error('Passwords do not match');
       return;
     }
+    setLoading(true)
 
     try {
       const response = await axios.post(`https://mernbackend-2-ebc9.onrender.com/user/resetpassword/${token}`, { password });
@@ -26,9 +29,14 @@ const ResetPassword = () => {
       }
     } catch (error) {
       toast.error('Something went wrong. Please try again later.');
+    }finally{
+      setLoading(false)
     }
   };
 
+  if(loading){
+    return <Loader/>
+  }
   return (
     <>
     <div className="forgot-password-container">

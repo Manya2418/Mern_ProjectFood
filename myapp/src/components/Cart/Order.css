@@ -153,32 +153,40 @@
   button:hover {
     background-color: #ff9d00;
   }
+  .order-menu{
+    display: flex;
+    flex-wrap: wrap;
+  }
   
 
-  @media (max-width: 768px){
+  @media (max-width: 480px){
      .main-order{
-      margin-top: 15%;
+      margin-top: 20%;
       flex-direction: column;
     }
      .order1{
-      width: 32%;
       text-wrap: wrap;
       flex-direction: row;
-      display: relative;
+      overflow-x:auto;
+      scrollbar-width: 0;
       width: 100%;
       height: auto;
+      -webkit-overflow-scrolling: touch;
       gap: 20px;
+    }
+    .order1::-webkit-scrollbar {
+      display: none;
     }
     .order2{ 
       width: 100%;
-      margin-top: 25%;
+      margin-top: 40%;
       padding: 10px;
       
       flex-direction: column;
     }
-    .order-card{
+    .order-menu{
       
-    } 
+    }
      /* .order1{
       margin-top: 30%;
       position:static;

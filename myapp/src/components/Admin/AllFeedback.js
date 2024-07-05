@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux';
 import { adminlogout, initializeAdmin } from '../../store/adminSlice';
 import Card from './Card';
 import toast, { Toaster } from 'react-hot-toast';
+import Loader from '../Loader';
 
 const AllFeedback=()=> {
     const [users, setUsers] = useState([]);
+    const [loading,setLoading]=useState();
     const navigate=useNavigate();
     const dispatch=useDispatch();
    
@@ -24,16 +26,23 @@ const AllFeedback=()=> {
 
     useEffect(() => {
         const fetchUsers = async () => {
+            setLoading(true)
             try {
                 const response = await axios.get('https://mernbackend-2-ebc9.onrender.com/user/contact');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);
+            }finally{
+                setLoading(false)
             }
         };
 
         fetchUsers();
     }, []);
+
+    if(loading){
+        return <Loader/>
+    }
 
     return (
         <>
@@ -54,14 +63,25 @@ const AllFeedback=()=> {
         <div className='order2'>
         <h1 class=" text-orange-500 font-bold text-xl">All Feedback</h1>
     
-            {users.map(user => (
-        
-                <div className="order-card">
-                Name:{user.name} <br/>
-                Email:{user.email} <br />
-                Message:{user.message}
-    </div>
-        ))}
+        <table className="users-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map(feedback => (
+                                <tr key={feedback._id}>
+                                    <td>{feedback.name}</td>
+                                    <td>{feedback.email}</td>
+                                    <td>{feedback.message}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
             
             </div>
 

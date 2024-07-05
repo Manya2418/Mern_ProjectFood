@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Admin.css'; 
 import { Link } from 'react-router-dom';
+import Loader from '../Loader';
 const AdminSignup = () => {
     const initialData={
         name: '',
@@ -12,6 +13,13 @@ const AdminSignup = () => {
     }
     const [formData, setFormData] = useState(initialData);
     const { name, email, password} = formData;
+    const [loading,setLoading]=useState()
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const onChange = async e => {
         
@@ -49,6 +57,7 @@ const AdminSignup = () => {
             setFormData({password: ''})
             return;
         }
+        setLoading(true)
         try {
             const res = await axios.post('https://mernbackend-2-ebc9.onrender.com/admin/signup', formData);
             toast.success('Signup successful!');
@@ -57,8 +66,14 @@ const AdminSignup = () => {
         } catch (err) {
             toast.error('Invalid Details');
             setFormData(initialData)
+        }finally{
+            setLoading(false)
         }
     };
+
+    if(loading){
+        return <Loader/>
+    }
 
     return (
         <>
@@ -103,14 +118,29 @@ const AdminSignup = () => {
                 <label for="password">
                         Password
                     </label>
+                    <div style={{ position: 'relative' }}>
                     <input
-                        type="password"
+                        type={showPassword?"text":"password"}
                         name="password"
                         value={password}
                         onChange={onChange}
                         placeholder='Password'
+                        style={{ paddingRight: '30px' }}
                         required
                     />
+                    <span
+                    onClick={togglePasswordVisibility}
+                    style={{
+                        position: 'absolute',
+                        right: '10px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        cursor: 'pointer'
+                    }}
+                >
+                    <i className={showPassword ? "fas fa-eye" : "fas fa-eye-slash"}></i>
+                    </span>
+            </div>
                 </div>
                 <button type="submit">Signup</button>
             </form><br/>

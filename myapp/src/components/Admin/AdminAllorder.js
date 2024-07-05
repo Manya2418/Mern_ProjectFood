@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 import OrderCard from "../Cart/OrderCard";
 import { initializeAdmin, adminlogout } from "../../store/adminSlice";
 import toast, { Toaster } from "react-hot-toast";
-
+import './Admin.css'
+import Loader from "../Loader";
 function OrderList() {
   const [order, setorder] = useState([]);
+  const [loading,setLoading]=useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,6 +22,7 @@ function OrderList() {
         navigate("/user/login");
         return;
       }
+      setLoading(true)
       try {
         const response = await axios.get(
           `https://mernbackend-2-ebc9.onrender.com/admin/allorder`
@@ -28,6 +31,8 @@ function OrderList() {
         setorder(response.data);
       } catch (error) {
         console.error("There was an error fetching the data!", error);
+      }finally{
+        setLoading(false)
       }
     };
 
@@ -55,6 +60,9 @@ function OrderList() {
     //   console.error('Error removing order:', error);
     // }
   };
+  if(loading){
+    return <Loader/>
+  }
 
   return (
     <>

@@ -16,7 +16,6 @@ const MenuCard = ({ menu }) => {
             navigate('/user/login');
             window.location.reload();
         } else {
-            toast.success("Item added!")
             dispatch(add(menu));
             
         }
@@ -25,12 +24,13 @@ const MenuCard = ({ menu }) => {
     return (
         <>
         <div className="menu-card">
-            
-            <img src={menu.imageUrl} alt={menu.name} className="menu-image" />
+            <div class="relative"><img src={menu.imageUrl} alt={menu.name} className="menu-image"/>
+            <div class=" absolute right-2 z-30 bottom-4 text-red-600"><i class="fa-solid fa-heart"></i></div>
+            </div>
             <h2 className="menu-name">{menu.name}</h2>
             <p className="menu-description">{menu.description}</p>
             <p className="menu-price">Price: Rs.{menu.price}</p>
-            <p className="menu-stock">{menu.inStock ? 'In Stock' : 'Out of Stock'}</p>
+            <p class="font-bold">{menu.inStock ? <span style={{color:"green"}}>In Stock</span> : <span style={{color:"red"}}>Out of Stock</span>}</p>
             <button onClick={() => handleAdd(menu)} className="btn-add" >Add to Cart</button>
         </div>
         <Toaster/>

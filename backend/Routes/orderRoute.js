@@ -1,7 +1,11 @@
 import express from 'express';
 import Order from '../model/orderSchema.js';
-const router = express.Router();  
+import stripeLib from 'stripe'
 
+const stripe=stripeLib("sk_test_51NmBxVSJm0EOvE96GfRtoViGGWb838JUFEP8lJgK2ekvKVL496R9kwU9m8wlh08kpI7WLtGHnXlknboJ8SjwVOqW00j5qYKm7G")
+
+
+const router = express.Router();  
 router.get('/orderdetails', async (req, res) => {
   const {userId}=req.query;
   try {
@@ -41,12 +45,41 @@ router.post('/orderdetails', async (req, res) => {
   
     try {
       const savedOrder = await order.save();
-      res.status(201).json(savedOrder);
+       res.status(201).json({
+        order: savedOrder
+      });
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
   });
 
+
+  router.post('/create-checkout-session', async (req, res) => {
+    const { items, email, totalPrice } = req.body;
+  
+    console.log()
+    const line_items = items.map(item => ({
+      price_data: {
+        currency: 'inr',
+        product_data: {
+          name: item.name,
+        },
+        unit_amount: item.price * 100,
+      },
+      quantity: item.quantity,
+    }));
+  
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items,
+      mode: 'payment',
+      success_url: 'http://localhost:3000/user/welcome', 
+      cancel_url: 'http://localhost:3000', 
+      customer_email: email,
+    });
+  
+    res.json({ id: session.id });
+  });
 
 
 export default router;

@@ -1,24 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import toast, { Toaster } from 'react-hot-toast';
 
-const loadState = () => {
-    try {
-        const serializedState = sessionStorage.getItem('cart');
-        return serializedState ? JSON.parse(serializedState) : [];
-    } catch (e) {
-        console.warn('Could not load state', e);
-        return [];
-    }
-};
 
-const saveState = (state) => {
-    try {
-        const serializedState = JSON.stringify(state);
-        sessionStorage.setItem('cart', serializedState);
-    } catch (e) {
-        console.warn('Could not save state', e);
-    }
-};
 const initialState=loadState();
 const CartSlice=createSlice({
     name:'cart',

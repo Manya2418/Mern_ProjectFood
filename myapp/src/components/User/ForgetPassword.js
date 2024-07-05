@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './ForgetPassword.css'; 
 import toast, { Toaster } from 'react-hot-toast';
+import Loader from '../Loader';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const[loading ,setLoading]=useState();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const response = await axios.post('https://mernbackend-2-ebc9.onrender.com/user/forgotpassword', { email });
       if (response.status === 200) {
@@ -17,9 +20,14 @@ const ForgotPassword = () => {
       }
     } catch (error) {
       toast.error('Something went wrong. Please try again later.');
+    }finally{
+      setLoading(false)
     }
   };
 
+  if(loading){
+    return <Loader/>
+  }
   return (
     <>
     <div className="forgot-password-container">

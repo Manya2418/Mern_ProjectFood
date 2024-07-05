@@ -5,6 +5,7 @@ import { initializeAdmin,  adminlogout } from '../../store/adminSlice';
 import '../Cart/Order.css'
 import axios from 'axios';
 import { Toaster,toast } from 'react-hot-toast';
+import Loader from '../Loader';
 
 const AdminProfile = () => {
   const [adminData, setadminData] = useState(() => {
@@ -17,7 +18,7 @@ const AdminProfile = () => {
   const [name, setName] = useState(adminData ? adminData.admin.name : '');
   const [email, setEmail] = useState(adminData ? adminData.admin.email : '');
   const [showModal, setShowModal] = useState(false); 
-
+  const [loading,setLoading]=useState()
   
   
 
@@ -39,6 +40,7 @@ const AdminProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
         const response = await axios.put(`https://mernbackend-2-ebc9.onrender.com/admin/update?adminId=${adminId}`, {
         name: name,
@@ -63,8 +65,14 @@ const AdminProfile = () => {
     } catch (error) {
       console.error('Error updating user:', error);
       alert('Failed to update user. Please try again.');
+    }finally{
+      setLoading(false)
     }
   };
+
+  if(loading){
+    return <Loader/>
+  }
   return (
 
     <>

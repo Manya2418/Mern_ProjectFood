@@ -19,6 +19,7 @@ const Profile = () => {
   const [email, setEmail] = useState(userData ? userData.user.email : '');
   const [phone, setPhone] = useState(userData ? userData.user.phone : '');
   const [showModal, setShowModal] = useState(false); 
+  const [loading,setLoading]=useState()
 
   const navigate=useNavigate();
   const dispatch=useDispatch();
@@ -35,6 +36,7 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     try {
         const response = await axios.put(`https://mernbackend-2-ebc9.onrender.com/user/update?userId=${userId}`, {
         name: name,
@@ -60,9 +62,13 @@ const Profile = () => {
     } catch (error) {
       console.error('Error updating user:', error);
       toast.error('Failed to update user. Please try again.');
+    }finally{
+      setLoading(false)
     }
   };
-  
+  if(loading){
+    return false;
+  }
   return (
 
     <>

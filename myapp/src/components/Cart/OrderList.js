@@ -7,9 +7,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { initializeAuth, logout } from '../../store/userSlice';
 import { useDispatch } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
+import Loader from '../Loader';
 
 function OrderList() {
   const [order, setorder] = useState([]);
+  const [loading,setLoading]=useState()
+  
+  const [searchDate, setSearchDate] = useState('');
   const navigate=useNavigate();
   const dispatch=useDispatch();
 
@@ -25,12 +29,15 @@ function OrderList() {
         navigate('/user/login')
         return;
       }
+      setLoading(true)
       try {
         const response = await axios.get(`http://localhost:5000/order/orderdetails?userId=${userId}`,userId)
 
         setorder(response.data);
       } catch (error) {
         console.error('There was an error fetching the data!', error);
+      }finally{
+        setLoading(false)
       }
     };
 
@@ -64,6 +71,18 @@ function OrderList() {
       console.error('Error removing order:', error);
     }
   };
+  const handleSearchDateChange = (e) => {
+    setSearchDate(e.target.value);
+  };
+
+
+  const filteredOrders = searchDate
+  ? order.filter(order => new Date(order.orderDate).toLocaleDateString() === new Date(searchDate).toLocaleDateString())
+  : order;
+
+  if(loading){
+    return <Loader/>
+  }
 
   return (
     <>
@@ -86,7 +105,39 @@ function OrderList() {
         </div>
     <div className='order2'>
       <h1 class="text-orange-500 font-bold text-xl">Order Details</h1>
-    
+      <div className="search-bar">
+            <input
+              type="date"
+              value={searchDate}
+              onChange={handleSearchDateChange}
+              placeholder="Search by Date"
+            />
+          </div>
+      <table className="users-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Ordered by</th>
+                  <th>Restaurant</th>
+                  <th>Total Price</th>
+                  <th>Discounted Price</th>
+                  <th>Order Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredOrders.map(order => (
+                  <tr key={order._id}>
+                    <td>{order._id}</td>
+                    <td>{order.userName}</td>
+                    <td>{order.restaurantName}</td>
+                    <td>{order.totalPrice}</td>
+                    <td>{order.discountedPrice}</td>
+                    <td>{new Date(order.orderDate).toLocaleDateString()} {new Date(order.orderDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</td>
+                    
+                  </tr>
+                ))}
+              </tbody>
+            </table>
     <div className="restaurant-list">
     
       

@@ -4,8 +4,11 @@ import Lottie from 'lottie-react'
 import Footer from './Footer'
 import toast, { Toaster } from 'react-hot-toast'
 import axios from 'axios'
+import Loader from '../Loader'
 
 const ContactUs = () => {
+  
+  const [loading,setLoading]=useState();
     const initial={
         name: '',
         email: '',
@@ -20,7 +23,7 @@ const ContactUs = () => {
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-    
+        setLoading(true)
         try {
           await axios.post('https://mernbackend-2-ebc9.onrender.com/user/contact', formData);
           
@@ -29,10 +32,14 @@ const ContactUs = () => {
         } catch (error) {
           console.error('Failed to send message:', error);
           toast.error('Failed to send message. Please try again later.');
+        }finally{
+          setLoading(false)
         }
       };
 
-
+      if(loading){
+        return <Loader/>
+      }
 
   return (
     <>
