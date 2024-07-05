@@ -20,7 +20,7 @@ const ResetPassword = () => {
     setLoading(true)
 
     try {
-      const response = await axios.post(`https://mernbackend-2-ebc9.onrender.com/user/resetpassword/${token}`, { password });
+      const response = await axios.post(`https://mernbackend-1-9ihi.onrender.com/user/resetpassword/${token}`, { password });
 
       if (response.status === 200) {
         toast.success('Password has been reset!');

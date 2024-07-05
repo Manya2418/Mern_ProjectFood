@@ -68,7 +68,7 @@ const Signup = () => {
             return;
         }
         try {
-            const res = await axios.post('https://mernbackend-2-ebc9.onrender.com/user/signup', formData);
+            const res = await axios.post('https://mernbackend-1-9ihi.onrender.com/user/signup', formData);
             toast.success('Signup successful!');
             setFormData(initialData)
             console.log(res.data);

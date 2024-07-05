@@ -39,7 +39,7 @@ const Login = () => {
         e.preventDefault();
         setLoading(true)
         try {
-            const res = await axios.post('https://mernbackend-2-ebc9.onrender.com/user/login', formData);
+            const res = await axios.post('https://mernbackend-1-9ihi.onrender.com/user/login', formData);
             const userData={
                 user: res.data.user,
                 token: res.data.token,

@@ -42,7 +42,7 @@ const AdminProfile = () => {
     e.preventDefault();
     setLoading(true)
     try {
-        const response = await axios.put(`https://mernbackend-2-ebc9.onrender.com/admin/update?adminId=${adminId}`, {
+        const response = await axios.put(`https://mernbackend-1-9ihi.onrender.com/admin/update?adminId=${adminId}`, {
         name: name,
         email:email,
       },

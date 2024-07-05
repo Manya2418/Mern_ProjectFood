@@ -86,7 +86,7 @@ export const Cart = () => {
     setLoading(true);
 
     try {
-      const respon = await axios.post('https://mernbackend-2-ebc9.onrender.com/order/orderdetails', orderData);
+      const respon = await axios.post('https://mernbackend-1-9ihi.onrender.com/order/orderdetails', orderData);
 
       
       // toast.success('Payment successful!');
@@ -95,7 +95,7 @@ export const Cart = () => {
       // dispatch(clearCart());
       // sessionStorage.removeItem('cart')
 
-      const response = await axios.post('http://localhost:5000/order/create-checkout-session', orderData);
+      const response = await axios.post('https://mernbackend-1-9ihi.onrender.com/order/create-checkout-session', orderData);
       const sessionId = response.data.id;
 
       

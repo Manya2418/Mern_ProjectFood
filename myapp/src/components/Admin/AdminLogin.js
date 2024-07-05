@@ -37,7 +37,7 @@ const AdminLogin = () => {
         e.preventDefault();
         setLoading(true)
         try {
-            const res = await axios.post('https://mernbackend-2-ebc9.onrender.com/admin/login', formData);
+            const res = await axios.post('https://mernbackend-1-9ihi.onrender.com/admin/login', formData);
             const adminData={
                 admin: res.data.admin,
                 token: res.data.token,

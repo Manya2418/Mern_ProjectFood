@@ -28,7 +28,7 @@ function OrderList() {
       }
       setLoading(true)
       try {
-        const response = await axios.get(`https://mernbackend-2-ebc9.onrender.com/admin/allorder`)
+        const response = await axios.get(`https://mernbackend-1-9ihi.onrender.com/admin/allorder`)
 
         setorder(response.data);
       } catch (error) {

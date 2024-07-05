@@ -59,7 +59,7 @@ const AdminSignup = () => {
         }
         setLoading(true)
         try {
-            const res = await axios.post('https://mernbackend-2-ebc9.onrender.com/admin/signup', formData);
+            const res = await axios.post('https://mernbackend-1-9ihi.onrender.com/admin/signup', formData);
             toast.success('Signup successful!');
             setFormData(initialData)
             console.log(res.data);

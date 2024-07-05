@@ -28,7 +28,7 @@ const AllFeedback=()=> {
         const fetchUsers = async () => {
             setLoading(true)
             try {
-                const response = await axios.get('https://mernbackend-2-ebc9.onrender.com/user/contact');
+                const response = await axios.get('https://mernbackend-1-9ihi.onrender.com/user/contact');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);

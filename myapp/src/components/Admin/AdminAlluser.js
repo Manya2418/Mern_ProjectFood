@@ -31,7 +31,7 @@ const AdminAlluser=()=> {
         const fetchUsers = async () => {
             setLoading(true)
             try {
-                const response = await axios.get('https://mernbackend-2-ebc9.onrender.com/admin/alluser');
+                const response = await axios.get('https://mernbackend-1-9ihi.onrender.com/admin/alluser');
                 setUsers(response.data);
             } catch (error) {
                 console.error('Error fetching users:', error);

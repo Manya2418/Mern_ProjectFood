@@ -64,7 +64,7 @@ function OrderList() {
 
   const handleRemoveOrder = async (orderId) => {
     try {
-      await axios.delete(`https://mernbackend-2-ebc9.onrender.com/order/delete?id=${orderId}`);
+      await axios.delete(`https://mernbackend-1-9ihi.onrender.com/order/delete?id=${orderId}`);
       setorder(order.filter(order => order._id !== orderId)); 
       window.location.reload();
     } catch (error) {

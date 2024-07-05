@@ -38,7 +38,7 @@ const Profile = () => {
     e.preventDefault();
     setLoading(true)
     try {
-        const response = await axios.put(`https://mernbackend-2-ebc9.onrender.com/user/update?userId=${userId}`, {
+        const response = await axios.put(`https://mernbackend-1-9ihi.onrender.com/user/update?userId=${userId}`, {
         name: name,
         email:email,
         phone:phone,

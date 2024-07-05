@@ -17,7 +17,7 @@ const RestaurantMenu = () => {
     setLoading(true)
     const fetchData=async()=>{
       try{
-        const response=await axios.get(`https://mernbackend-2-ebc9.onrender.com/menus/${restaurantId}`)
+        const response=await axios.get(`https://mernbackend-1-9ihi.onrender.com/menus/${restaurantId}`)
         setMenuItems(response.data)
       }catch(error){
         console.error('Error fetching menu:', error)
