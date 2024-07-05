@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { adminlogout, initializeAdmin } from '../../store/adminSlice';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../Loader';
+import '../Cart/Order.css'
 
 const AdminAlluser=()=> {
     const [users, setUsers] = useState([]);

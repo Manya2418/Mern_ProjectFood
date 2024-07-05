@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { adminlogout, initializeAdmin } from '../../store/adminSlice';
 import toast, { Toaster } from 'react-hot-toast';
 import Loader from '../Loader';
-
+import '../Cart/Order.css'
 function OrderList() {
   const [order, setorder] = useState([]);
   const navigate=useNavigate();

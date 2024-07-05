@@ -5,7 +5,7 @@ import { initializeAdmin, adminlogout } from '../../store/adminSlice';
 import Animation from '../Animations/welcome.json'
 import Lottie from 'lottie-react'
 import { Toaster ,toast} from 'react-hot-toast';
-
+import '../Cart/Order.css'
 
 const AdminWelcome = () => {
     const navigate=useNavigate();

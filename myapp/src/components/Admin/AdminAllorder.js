@@ -6,13 +6,14 @@ import OrderCard from "../Cart/OrderCard";
 import { initializeAdmin, adminlogout } from "../../store/adminSlice";
 import toast, { Toaster } from "react-hot-toast";
 import './Admin.css'
+import '../Cart/Order.css'
 import Loader from "../Loader";
 function OrderList() {
   const [order, setorder] = useState([]);
   const [loading,setLoading]=useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [searchDate, setSearchDate] = useState('');
   useEffect(() => {
     const fetchorders = async () => {
       const admindata = JSON.parse(sessionStorage.getItem("adminData"));
@@ -59,7 +60,21 @@ function OrderList() {
     // } catch (error) {
     //   console.error('Error removing order:', error);
     // }
+
+  
   };
+
+
+  
+  const handleSearchDateChange = (e) => {
+    setSearchDate(e.target.value);
+  };
+
+
+  const filteredOrders = searchDate
+  ? order.filter(order => new Date(order.orderDate).toLocaleDateString() === new Date(searchDate).toLocaleDateString())
+  : order;
+
   if(loading){
     return <Loader/>
   }
@@ -90,6 +105,39 @@ function OrderList() {
           >
             Order Details
           </h1>
+          <div className="search-bar">
+            <input
+              type="date"
+              value={searchDate}
+              onChange={handleSearchDateChange}
+              placeholder="Search by Date"
+            />
+          </div>
+      <table className="users-table">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Ordered by</th>
+                  <th>Restaurant</th>
+                  <th>Total Price</th>
+                  <th>Discounted Price</th>
+                  <th>Order Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredOrders.map(order => (
+                  <tr key={order._id}>
+                    <td>{order._id}</td>
+                    <td>{order.userName}</td>
+                    <td>{order.restaurantName}</td>
+                    <td>{order.totalPrice}</td>
+                    <td>{order.discountedPrice}</td>
+                    <td>{new Date(order.orderDate).toLocaleDateString()} {new Date(order.orderDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</td>
+                    
+                  </tr>
+                ))}
+              </tbody>
+            </table>
 
           <div className="restaurant-list">
             {order.map((order) => (
