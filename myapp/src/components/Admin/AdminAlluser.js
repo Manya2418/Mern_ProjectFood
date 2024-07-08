@@ -75,7 +75,7 @@ const AdminAlluser=()=> {
             <div className="search-container">
             <input
             type="text"
-            placeholder="Search menu..."
+            placeholder="Search user..."
             value={searchTerm}
             onChange={handleSearch}
             />
