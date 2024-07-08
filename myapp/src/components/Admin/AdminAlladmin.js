@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { adminlogout, initializeAdmin } from '../../store/adminSlice';
 import Loader from '../Loader'
+import AdminWelcome from './AdminWelcome';
 
 const AdminAlladmin=()=> {
     const [users, setUsers] = useState([]);
@@ -98,6 +99,7 @@ const AdminAlladmin=()=> {
                     </tbody>
                 </table>
                 </div>
+
         </div>
         
     );

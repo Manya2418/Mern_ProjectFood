@@ -7,6 +7,3 @@ const dbconnection=mongoose.connect('mongodb+srv://manyasahu:Manya123@cluster0.z
 export default dbconnection;
 
 
-// mongodb://localhost:27017
-
-// mongodb+srv://manyasahu:Manya123@cluster0.zgfhul6.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

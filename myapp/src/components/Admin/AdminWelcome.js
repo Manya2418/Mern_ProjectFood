@@ -44,13 +44,14 @@ const AdminWelcome = () => {
         <h1 class=" text-orange-500 font-bold font-serif text-xl">Hello {username}!</h1>
            
         <div className="order2_con" >
+
             <div style={{width:"100%",color:"rgba(0, 0, 0, 0.601)"}}>
             Dear {username},<br/><br/>
             Thank you for your hard work and dedication.<br/> Your efforts keep Manyawar running smoothly and efficiently. Your commitment and excellence make a huge impact every day.
 We appreciate everything you do. Keep up the great work!<br/><br/>
 Best regards,<br/>Team Manyawar
             </div>
-          <Lottie animationData={Animation} loop={true} autoplay={true} /></div>
+            <Lottie animationData={Animation} loop={true} autoplay={true} /></div>
         </div>
         </div>
       <Toaster/>

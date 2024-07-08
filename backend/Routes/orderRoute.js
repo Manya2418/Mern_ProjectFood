@@ -73,8 +73,8 @@ router.post('/orderdetails', async (req, res) => {
       payment_method_types: ['card'],
       line_items,
       mode: 'payment',
-      success_url: 'http://localhost:3000/user/welcome', 
-      cancel_url: 'http://localhost:3000', 
+      success_url: 'https://food-project-food-i2jz.vercel.app/user/welcome', 
+      cancel_url: 'https://food-project-food-i2jz.vercel.app/', 
       customer_email: email,
     });
   
