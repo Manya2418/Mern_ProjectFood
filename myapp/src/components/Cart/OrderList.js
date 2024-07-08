@@ -31,7 +31,7 @@ function OrderList() {
       }
       setLoading(true)
       try {
-        const response = await axios.get(`http://localhost:5000/order/orderdetails?userId=${userId}`,userId)
+        const response = await axios.get(`https://mernbackend-1-9ihi.onrender.com/order/orderdetails?userId=${userId}`,userId)
 
         setorder(response.data);
       } catch (error) {
