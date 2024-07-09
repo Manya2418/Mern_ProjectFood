@@ -131,7 +131,7 @@ router.post('/forgotpassword', async (req, res) => {
                Please click on the following link, or paste this into your browser to complete the process:\n\n
                https://food-project-food-i2jz.vercel.app/user/resetpassword/${token}\n\n
                If you did not request this, please ignore this email and your password will remain unchanged.\n`,
-      });
+      }); 
       res.status(200).json({ message: 'Password reset email sent' });
 
     } catch (err) {

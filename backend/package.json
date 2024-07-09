@@ -9,9 +9,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"nodemon server.js",
-    "build":"npm i"
-
+    "start": "nodemon server.js",
+    "build": "npm i"
   },
   "author": "",
   "license": "ISC",
