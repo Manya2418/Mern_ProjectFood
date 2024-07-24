@@ -40,9 +40,9 @@ const Footer = () => {
                 {/* Column 4: Contact Info */}
                 <div className="footer-column">
                     <h3>Contact Info</h3>
-                    <p>Email: contact@example.com</p>
+                    <p>Email: manyavar12@gmail.com</p>
                     <p>Phone: +1234567890</p>
-                    <p>Address: 123 Street, City, Country</p>
+                    <p>Address: 123 Indrapuri, Bhopal M.P.</p>
                 </div>
             
             {/* Subscribe Section */}
