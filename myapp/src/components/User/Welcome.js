@@ -1,66 +1,105 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import { initializeAuth, logout } from '../../store/userSlice';
-import Animation from '../Animations/welcome.json'
-import Lottie from 'lottie-react'
-import { Toaster ,toast} from 'react-hot-toast';
-import '../Cart/Order.css'
+import Animation from '../Animations/welcome.json';
+import Lottie from 'lottie-react';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Welcome = () => {
-    const navigate=useNavigate();
-    const dispatch=useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-    const userData = JSON.parse(sessionStorage.getItem('userData'));
-    const username=userData?userData.user.name:null;
-   
-     const handleLogout = () => {
-       sessionStorage.clear();  
-       dispatch(logout());
-       toast.success("Logged Out Successfully!")
-   
-       navigate('/'); 
-       window.location.reload(); 
-     };
-     useEffect(() => {
-       dispatch(initializeAuth());
-     }, [dispatch]);
+  const userData = JSON.parse(sessionStorage.getItem('userData'));
+  const username = userData && userData.user ? userData.user.name : 'Guest';
+
+  const handleLogout = () => {
+    sessionStorage.clear();
+    dispatch(logout());
+    toast.success('Logged Out Successfully!');
+    navigate('/');
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    dispatch(initializeAuth());
+  }, [dispatch]);
+
   return (
     <>
-     <div className="main-order">
-        <div className="order1">
-            <h1><Link to="/user/welcome">
+      <div className="flex min-h-screen">
+        {/* Sidebar */}
+        <div className="w-64 bg-teal-600 text-white fixed top-0 left-0 bottom-0 p-6">
+          <h2 className="text-2xl font-bold mb-6">Profile Menu</h2>
+          <ul>
+            <li>
+              <Link to="/user/welcome" className="block py-2 px-4 hover:bg-teal-500 rounded-md">
                 Home
-            </Link></h1>
-            
-            <h1><Link to="/user/profile" >
+              </Link>
+            </li>
+            <li>
+              <Link to="/user/profile" className="block py-2 px-4 hover:bg-teal-500 rounded-md">
                 User Profile
-            </Link></h1>
-            <h1><Link to="/order/orderdetails">
+              </Link>
+            </li>
+            <li>
+              <Link to="/order/orderdetails" className="block py-2 px-4 hover:bg-teal-500 rounded-md">
                 All Orders
-            </Link></h1>
-            <h1><Link to='/'>
-            Go Back </Link></h1>
-            
-            <button onClick={handleLogout} className="btn-logout">Logout</button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/" className="block py-2 px-4 hover:bg-teal-500 rounded-md">
+                Go Back
+              </Link>
+            </li>
+            <li>
+              <button
+                onClick={handleLogout}
+                className="block w-full py-2 px-4 mt-6 bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
         </div>
-        <div className='order2'>
-          <h1 class=" text-orange-500 font-bold font-serif text-xl">Hello {username}!</h1>
-          <div className="order2_con" >
-            <div style={{width:"100%",color:"rgba(0, 0, 0, 0.601)"}}>
-            Dear {username},<br/>
-            Thank you for choosing Manyawar! <br/><br/>We’re committed to delivering the freshest and tastiest meals right to your doorstep. Our team ensures top-quality ingredients, hygiene, and timely delivery from the best restaurants.
-            Your satisfaction is our top priority. Whether it's a quick lunch or a cozy dinner, we promise a delightful dining experience every time.
-            Enjoy your meal!<br/><br/>
-            Best regards,<br/>
-            Manyawar Team
-            </div>
-          <Lottie animationData={Animation} loop={true} autoplay={true} /></div>
-        </div>
-        </div>
-      <Toaster/>
-    </>
-  )
-}
 
-export default Welcome
+        {/* Main Content */}
+        <div className="ml-64 p-6 flex flex-col w-full ">
+          <h1 className="text-orange-500 font-bold text-2xl mt-10">Hello {username}!</h1>
+          <div className="flex justify-between items-start">
+            <div className="w-3/5 text-lg text-gray-700">
+              <p>
+                Dear {username},<br />
+                <br />
+                Welcome to <strong>ShopLocal</strong> – your neighborhood marketplace in the palm of your hand! 🛍️
+                <br />
+                <br />
+                We’re thrilled to have you join our mission to support local businesses and bring the charm of your
+                nearby stores online. Whether you’re craving something special, looking for daily essentials, or just
+                exploring what’s around you — we connect you to trusted shops just around the corner.
+                <br />
+                <br />
+                Every order you make helps strengthen the local economy, uplift small vendors, and build a more connected
+                community.
+                <br />
+                <br />
+                <strong>Let’s shop local, support small, and grow together!</strong>
+                <br />
+                <br />
+                Warm regards,
+                <br />
+                <strong>The ShopLocal Team</strong>
+              </p>
+            </div>
+            <div className="w-2/5">
+              <Lottie animationData={Animation} loop={true} autoplay={true} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <Toaster />
+    </>
+  );
+};
+
+export default Welcome;

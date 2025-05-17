@@ -9,22 +9,38 @@ function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
   const [loading,setLoading]=useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const [userLocation, setUserLocation] = useState(null);
 
   useEffect(() => {
-    const fetchData=async ()=>{
-
-    setLoading(true)
-    try{
-      const response=await axios.get('https://mernbackend-1-9ihi.onrender.com/restaurant')
-      setRestaurants(response.data);
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get('http://localhost:4000/restaurant');
+        setRestaurants(response.data);
+      } catch (error) {
+        console.error('Error fetching restaurants:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  
+    // Get user location
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
+        },
+        (error) => {
+          console.error('Error getting user location:', error);
+          setUserLocation(null);
+        }
+      );
     }
-      catch(error) {
-        console.error('There was an error fetching the data!', error);
-      }finally{setLoading(false)};
-    }
-    fetchData()
-    
   }, []);
+  
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -43,7 +59,7 @@ function RestaurantList() {
 
   return (
     <div style={{backgroundColor:"white"}}>
-      <h1 style={{textAlign:"center", color:"#ff9d00",fontSize:"1.5rem"}}>Restaurants</h1>
+      <h1 style={{textAlign:"center", color:"#12a9a1",fontSize:"1.5rem"}}>Shops</h1>
     
       <div className="search-container">
         <input
@@ -52,12 +68,16 @@ function RestaurantList() {
           value={searchTerm}
           onChange={handleSearch}
         />
-        <i class="fa-solid fa-magnifying-glass absolute right-2 top-5 text-yellow-500"></i>
+        <i class="fa-solid fa-magnifying-glass absolute right-2 top-5 text-brand"></i>
       </div>
     <div className="restaurant-list">
       
        {filteredRestaurantItems.map(restaurant => (
-          <RestaurantItem key={restaurant._id} restaurant={restaurant}/>
+          <RestaurantItem
+          key={restaurant._id}
+          restaurant={restaurant}
+          userLocation={userLocation}
+        />
         ))}
     </div>
     </div>

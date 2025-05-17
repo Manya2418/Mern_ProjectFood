@@ -35,7 +35,7 @@
   
   .menu-name {
     text-transform: capitalize;
-    color: #ff9d00;
+    color: #12a9a1;
     font-family: unset;
   }
   
@@ -78,7 +78,7 @@
   .btn-add{
     width: 50%;
     font-size: 14px;
-    background-color: #ff9d00;
+    background-color: #12a9a1;
     border: none;
     padding: 0.5rem 1rem;
     color: white;
@@ -87,9 +87,9 @@
     transition: background-color 0.3s ease;
   }
   .btn-add:hover{
-    border: 1px solid #ff9d00 ;
+    border: 1px solid #12a9a1 ;
     background-color: #ffffff;
-    color: #ff9d00;
+    color: #12a9a1;
     transition: 1s;
   }
 

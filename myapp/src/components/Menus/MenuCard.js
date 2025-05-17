@@ -24,7 +24,8 @@ const MenuCard = ({ menu }) => {
     return (
         <>
         <div className="menu-card">
-            <div class="relative"><img src={menu.imageUrl} alt={menu.name} className="menu-image"/>
+            <div class="relative">
+                {/* <img src={menu.imageUrl} alt={menu.name} className="menu-image"/> */}
             <div class=" absolute right-2 z-30 bottom-4 text-red-600"><i class="fa-solid fa-heart"></i></div>
             </div>
             <h2 className="menu-name">{menu.name}</h2>

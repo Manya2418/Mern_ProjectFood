@@ -4,7 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Signup.css'; // Import the CSS file for styling
 import { Link } from 'react-router-dom';
-
+import Lottie from 'lottie-react';
+import Animation from '../Animations/lottieanim.json'
 
 const Signup = () => {
 
@@ -68,7 +69,7 @@ const Signup = () => {
             return;
         }
         try {
-            const res = await axios.post('https://mernbackend-1-9ihi.onrender.com/user/signup', formData);
+            const res = await axios.post('http://localhost:4000/user/signup', formData);
             toast.success('Signup successful!');
             setFormData(initialData)
             console.log(res.data);
@@ -87,10 +88,11 @@ const Signup = () => {
 
         
         <div className='login-image' >
-            <img src='../../images/new_background.avif' style={{width:"100%",height:"100%"}}/>
+        <Lottie animationData={Animation} loop={true} autoplay={true} />
         </div>
+       
         <div className="signup-container">
-        <h1 style={{fontFamily: "Roboto Slab",color:"#ff9d00",fontSize:"2rem"}}>Foodies Welcome here...</h1>
+        <h1 style={{fontFamily: "Roboto Slab",color:"#12a9a1",fontSize:"2rem"}}>Customer Welcome here...</h1>
             <p>Please Sign up with your details here</p><br/>
             
             <form className="signup-form" onSubmit={handleSubmit}>

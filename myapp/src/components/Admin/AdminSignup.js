@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './Admin.css'; 
 import { Link } from 'react-router-dom';
 import Loader from '../Loader';
+import Lottie from 'lottie-react';
+import Animation from '../Animations/lottieanim.json'
 const AdminSignup = () => {
     const initialData={
         name: '',
@@ -59,7 +61,7 @@ const AdminSignup = () => {
         }
         setLoading(true)
         try {
-            const res = await axios.post('https://mernbackend-1-9ihi.onrender.com/admin/signup', formData);
+            const res = await axios.post('http://localhost:4000/admin/signup', formData);
             toast.success('Signup successful!');
             setFormData(initialData)
             console.log(res.data);
@@ -80,11 +82,12 @@ const AdminSignup = () => {
         <div className='login-main'>
 
         
-        <div className='login-image' >
+        {/* <div className='login-image' >
             <img src='../../images/new_background.avif' style={{width:"100%",height:"100%"}}/>
-        </div>
+        </div> */}
+        <Lottie animationData={Animation} loop={true} autoplay={true} />
         <div className="signup-container">
-        <h1 style={{fontFamily: "Roboto Slab",color:"#ff9d00",fontSize:"2rem"}}>Admin Welcome here...</h1>
+        <h1 style={{fontFamily: "Roboto Slab",color:"#12a9a1",fontSize:"2rem"}}>Seller Welcome here...</h1>
             <p>Please Sign up with your details here</p><br/>
             
             <form className="signup-form" onSubmit={handleSubmit}>

@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../store/userSlice';
 import { Toaster ,toast} from 'react-hot-toast';
 import Loader from '../Loader';
+import Lottie from 'lottie-react';
+import Animation from '../Animations/lottieanim.json'
 
 const Login = () => {
     const initial={
@@ -39,7 +41,7 @@ const Login = () => {
         e.preventDefault();
         setLoading(true)
         try {
-            const res = await axios.post('https://mernbackend-1-9ihi.onrender.com/user/login', formData);
+            const res = await axios.post('http://localhost:4000/user/login', formData);
             const userData={
                 user: res.data.user,
                 token: res.data.token,
@@ -71,11 +73,13 @@ const Login = () => {
 
         
         <div className='login-image' >
-            <img src='../../images/new_background.avif' style={{width:"100%",height:"100%"}}/>
-        </div>
+        <Lottie animationData={Animation} loop={true} autoplay={true} />
+        </div> 
+        
+
         
         <div className="login-container">
-            <h1 style={{fontFamily: "Roboto Slab",color:"#ff9d00",fontSize:"2rem"}}>Foodies Welcome here...</h1>
+            <h1 style={{fontFamily: "Roboto Slab",color:"#12a9a1",fontSize:"2rem"}}>Customer Welcome here...</h1>
             <p>Please login with your details here</p><br/>
                <form className="login-form" onSubmit={handleSubmit}>
                 <div>

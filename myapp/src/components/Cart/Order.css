@@ -1,12 +1,13 @@
 .main-order{
     display: flex;
-    margin-top: 7%;
+    
     min-height: 100vh;
 }
 
 .order1{
     width: 15%;
-    background-color: #ff9d00;
+    /* background-color: #ff9d00; */
+    background-color: #12a9a1;
      position: fixed;
     
     display: flex;
@@ -32,12 +33,14 @@
 }
 .order2{
     margin-left: auto;
+    margin-top: 40px;
     width: 85%;
 }
 
 .btn-logout{
     background-color: #ffffff;
-    color: #ff9d00;
+    
+    color: #12a9a1;
     border: none;
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -144,14 +147,16 @@
   }
   
   button {
-    background-color: #ffa500;
+    /* background-color: #ffa500; */
+    background-color: #12a9a1;
     color: white;
     border: none;
     cursor: pointer;
   }
   
   button:hover {
-    background-color: #ff9d00;
+    /* background-color: #ff9d00; */
+    background-color: #12a9a1;
   }
   .order-menu{
     display: flex;

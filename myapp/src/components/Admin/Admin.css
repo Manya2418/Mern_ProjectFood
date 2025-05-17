@@ -22,3 +22,25 @@
 .users-table tr:hover {
     background-color: #ddd;
 }
+
+.main-order {
+    display: flex;
+  }
+  .order1 {
+    width: 16rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #319795;
+    color: white;
+    padding: 1.5rem;
+  }
+  .order2 {
+    margin-left: 16rem;
+    padding: 2rem;
+    flex: 1;
+    min-height: 100vh;
+    background-color: #f9fafb;
+  }
+  

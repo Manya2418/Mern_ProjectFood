@@ -7,7 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { adminlogin } from '../../store/adminSlice';
 import { Toaster,toast } from 'react-hot-toast';
 import Loader from '../Loader';
-
+import Lottie from 'lottie-react';
+import Animation from '../Animations/lottieanim.json'
 const AdminLogin = () => {
     const initial={
         email: '',
@@ -37,7 +38,7 @@ const AdminLogin = () => {
         e.preventDefault();
         setLoading(true)
         try {
-            const res = await axios.post('https://mernbackend-1-9ihi.onrender.com/admin/login', formData);
+            const res = await axios.post('http://localhost:4000/admin/login', formData);
             const adminData={
                 admin: res.data.admin,
                 token: res.data.token,
@@ -67,12 +68,10 @@ const AdminLogin = () => {
         <div className='login-main'>
 
         
-        <div className='login-image' >
-            <img src='../../images/new_background.avif' style={{width:"100%",height:"100%"}}/>
-        </div>
-        
+    
+        <Lottie animationData={Animation} loop={true} autoplay={true} />
         <div className="login-container">
-            <h1 style={{fontFamily: "Roboto Slab",color:"#ff9d00",fontSize:"2rem"}}>Admin Welcome here...</h1>
+            <h1 style={{fontFamily: "Roboto Slab",color:"#12a9a1",fontSize:"2rem"}}>Seller Welcome here...</h1>
             <p>Please login with your details here</p><br/>
                <form className="login-form" onSubmit={handleSubmit}>
                 <div>

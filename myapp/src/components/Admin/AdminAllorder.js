@@ -5,15 +5,15 @@ import { useDispatch } from "react-redux";
 import OrderCard from "../Cart/OrderCard";
 import { initializeAdmin, adminlogout } from "../../store/adminSlice";
 import toast, { Toaster } from "react-hot-toast";
-import './Admin.css'
-import '../Cart/Order.css'
+import "./Admin.css";
+import "../Cart/Order.css";
 import Loader from "../Loader";
 function OrderList() {
   const [order, setorder] = useState([]);
-  const [loading,setLoading]=useState();
+  const [loading, setLoading] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [searchDate, setSearchDate] = useState('');
+  const [searchDate, setSearchDate] = useState("");
   useEffect(() => {
     const fetchorders = async () => {
       const admindata = JSON.parse(sessionStorage.getItem("adminData"));
@@ -23,17 +23,17 @@ function OrderList() {
         navigate("/user/login");
         return;
       }
-      setLoading(true)
+      setLoading(true);
       try {
         const response = await axios.get(
-          `https://mernbackend-1-9ihi.onrender.com/admin/allorder`
+          `http://localhost:4000/admin/allorder`
         );
 
         setorder(response.data);
       } catch (error) {
         console.error("There was an error fetching the data!", error);
-      }finally{
-        setLoading(false)
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -60,41 +60,123 @@ function OrderList() {
     // } catch (error) {
     //   console.error('Error removing order:', error);
     // }
-
-  
   };
 
-
-  
   const handleSearchDateChange = (e) => {
     setSearchDate(e.target.value);
   };
 
-
   const filteredOrders = searchDate
-  ? order.filter(order => new Date(order.orderDate).toLocaleDateString() === new Date(searchDate).toLocaleDateString())
-  : order;
+    ? order.filter(
+        (order) =>
+          new Date(order.orderDate).toLocaleDateString() ===
+          new Date(searchDate).toLocaleDateString()
+      )
+    : order;
 
-  if(loading){
-    return <Loader/>
+  if (loading) {
+    return <Loader />;
   }
 
   return (
     <>
       <div className="main-order">
-        <div className="order1">
-          <h1> <Link to="/admin/welcome">Home</Link></h1>
-          <h1><Link to="/admin/profile">Profile</Link></h1>
-          <h1><Link to="/admin/alluser">Users</Link></h1>
-          <h1> <Link to="/admin/alladmin">Admins</Link></h1>
-          <h1><Link to="/admin/allorder">Orders</Link></h1>
-          <h1><Link to="/admin/contact">Feedback</Link></h1>
-          <h1><Link to="/">Go Back </Link></h1>
+        {/* Sidebar */}
+        <div className="w-64 bg-teal-600 text-white fixed top-0 left-0 bottom-0 p-6">
+          <h2 className="text-2xl font-bold mb-6">Profile Menu</h2>
+          <ul>
+            <li>
+              <Link
+                to="/admin/welcome"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/profile"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                User Profile
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/add-restaurant"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                Add Shop
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/restaurant/res"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                Your Shop
+              </Link>
+            </li>
+            <li>
+                          <Link
+                            to="/admin/add-menu-item"
+                            className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+                          >
+                            Add menu
+                          </Link>
+                        </li>
+            <li>
+              <Link
+                to="/admin/alluser"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                Customer
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/alladmin"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                Seller
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/allorder"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                All Orders
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/admin/contact"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                Feedback
+              </Link>
+            </li>
 
-          <button onClick={handleLogout} className="btn-logout">
-            Logout
-          </button>
+            <li>
+              <Link
+                to="/"
+                className="block py-2 px-4 hover:bg-teal-500 rounded-md"
+              >
+                Go Back
+              </Link>
+            </li>
+            <li>
+              <button
+                onClick={handleLogout}
+                className="block w-full py-2 px-4 mt-6 bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
         </div>
+
         <div className="order2">
           <h1
             style={{
@@ -113,31 +195,37 @@ function OrderList() {
               placeholder="Search by Date"
             />
           </div>
-      <table className="users-table">
-              <thead>
-                <tr>
-                  <th>Order ID</th>
-                  <th>Ordered by</th>
-                  <th>Restaurant</th>
-                  <th>Total Price</th>
-                  <th>Discounted Price</th>
-                  <th>Order Date</th>
+          <table className="users-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Ordered by</th>
+                <th>Restaurant</th>
+                <th>Total Price</th>
+                <th>Discounted Price</th>
+                <th>Order Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredOrders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.userName}</td>
+                  <td>{order.restaurantName}</td>
+                  <td>{order.totalPrice}</td>
+                  <td>{order.discountedPrice}</td>
+                  <td>
+                    {new Date(order.orderDate).toLocaleDateString()}{" "}
+                    {new Date(order.orderDate).toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })}
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {filteredOrders.map(order => (
-                  <tr key={order._id}>
-                    <td>{order._id}</td>
-                    <td>{order.userName}</td>
-                    <td>{order.restaurantName}</td>
-                    <td>{order.totalPrice}</td>
-                    <td>{order.discountedPrice}</td>
-                    <td>{new Date(order.orderDate).toLocaleDateString()} {new Date(order.orderDate).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}</td>
-                    
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+              ))}
+            </tbody>
+          </table>
 
           <div className="restaurant-list">
             {order.map((order) => (
@@ -150,7 +238,7 @@ function OrderList() {
           </div>
         </div>
       </div>
-      <Toaster/>
+      <Toaster />
     </>
   );
 }

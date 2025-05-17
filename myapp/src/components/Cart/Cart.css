@@ -11,12 +11,14 @@
     margin: 0;
     font-size: 1.2rem;
     font-weight: bold;
-    color:#e69500;
+    /* color:#e69500; */
+    color: #12a9a1;
   }
   
   .cart-total .btn {
     margin-top: 5px;
-    background-color: #ffae2c;
+    /* background-color: #ffae2c; */
+    background-color: #12a9a1;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -25,6 +27,8 @@
   }
   
   .cart-total .btn:hover {
-    background-color: #e69500;
+    /* background-color: #e69500; */
+    background-color: #12a9a1;
   }
+  
   

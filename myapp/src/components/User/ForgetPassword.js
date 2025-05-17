@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true)
     try {
-      const response = await axios.post('https://mernbackend-1-9ihi.onrender.com/user/forgotpassword', { email });
+      const response = await axios.post('http://localhost:4000/user/forgotpassword', { email });
       if (response.status === 200) {
         toast.success('Password reset email sent!');
       } else {

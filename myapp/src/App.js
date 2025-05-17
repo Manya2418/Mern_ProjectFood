@@ -23,37 +23,46 @@ import About from './components/Layout/About';
 import ForgotPassword from './components/User/ForgetPassword';
 import ResetPassword from './components/User/ResetPassword';
 import AllFeedback from './components/Admin/AllFeedback';
+// import Location from './components/Layout/Location';
+import AddRestaurant from './components/Restaurant/AddRestaurant';
+import AdminRestaurants from './components/Admin/AdminRestaurants';
+import AddMenuItemForm from './components/Admin/AddMenuItemForm';
 
 
 function App() {
   
-
   return (
      <div className="App">
       <Provider store={store}>
       <Navbar/>
+      
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/restaurant/:restaurantId" element={<RestaurantMenu/>}/>
+          <Route path="/restaurant/restaurants" element={<AdminRestaurants/>}/>
+          <Route path="/restaurant/res" element={<AdminRestaurants/>}/>
+         
           <Route path="/user/signup" element={<Signup/>}/>
           <Route path="/user/login" element={<Login/>}/>
           <Route path="/admin/signup" element={<AdminSignup/>}/>
           <Route path="/admin/login" element={<AdminLogin/>}/>
           <Route path='/contact' element={<ContactUs/>}/>
           <Route path='/about' element={<About/>}/>
-
+          <Route path="/admin/add-restaurant" element={<AddRestaurant />} 
+          />
           <Route path="/cart" element={<Cart />} 
           />
           <Route path='/order/orderdetails' element={<OrderList/>}/>
           <Route path='/user/profile' element={<Profile/>}/>
           <Route path='/user/welcome' element={<Welcome/>}/>
-
           <Route path='/admin/welcome' element={<AdminWelcome/>}/>
           <Route path='/admin/profile' element={<AdminProfile/>}/>
           <Route path='/admin/alluser' element={<AdminAlluser/>}/>
           <Route path='/admin/alladmin' element={<AdminAlladmin/>}/>
           <Route path='/admin/allorder' element={<AdminAllorder/>}/>
           <Route path='/admin/contact' element={<AllFeedback/>}/>
+          
+          <Route path='/admin/add-menu-item' element={<AddMenuItemForm/>}/>
           <Route path='/user/forgotpassword' element={<ForgotPassword/>}/>
           <Route path='/user/resetpassword/:token' element={<ResetPassword/>}/>
       </Routes>
