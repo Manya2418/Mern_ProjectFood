@@ -14,7 +14,16 @@ const FoodItemSchema=new mongoose.Schema({
     views:{
         type:Number,
         default:0,
-    }
+    },
+    adminId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Admin',
+        required: true
+      },
+      location: {
+        type: String,  
+        required: false
+      }
     
 })
 

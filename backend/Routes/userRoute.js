@@ -126,10 +126,10 @@ router.post('/forgotpassword', async (req, res) => {
       await transporter.sendMail({
         to: user.email,
         from:'manyasahu94@gmail.com',
-        subject: 'Manyawar Restaurant',
+        subject: 'ShopLocal Virtual Business',
         text: `You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n
                Please click on the following link, or paste this into your browser to complete the process:\n\n
-               https://food-project-food-i2jz.vercel.app/user/resetpassword/${token}\n\n
+               http://localhost:3000/user/resetpassword/${token}\n\n
                If you did not request this, please ignore this email and your password will remain unchanged.\n`,
       }); 
       res.status(200).json({ message: 'Password reset email sent' });
@@ -144,13 +144,10 @@ router.post('/forgotpassword', async (req, res) => {
   router.post('/resetpassword/:token', async (req, res) => {
     const { token}=req.params;
     const {password}=req.body;
-    console.log(password)
-    console.log(token)
     try {
       const user = await User.findOne({ password: token,
         resetPasswordExpires: { $gt: Date.now() }
     });
-      console.log(user)
       if (!user) {
         return res.status(400).send({ message: 'Password reset token is invalid or has expired' });
       }
@@ -193,5 +190,8 @@ router.post('/contact', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 })
+
+
+
 
 export default router;

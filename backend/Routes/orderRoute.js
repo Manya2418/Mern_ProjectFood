@@ -2,7 +2,7 @@ import express from 'express';
 import Order from '../model/orderSchema.js';
 import stripeLib from 'stripe'
 
-const stripe=stripeLib("sk_test_51NmBxVSJm0EOvE96GfRtoViGGWb838JUFEP8lJgK2ekvKVL496R9kwU9m8wlh08kpI7WLtGHnXlknboJ8SjwVOqW00j5qYKm7G")
+const stripe=stripeLib(process.env.key)
 
 
 const router = express.Router();  
@@ -57,7 +57,6 @@ router.post('/orderdetails', async (req, res) => {
   router.post('/create-checkout-session', async (req, res) => {
     const { items, email, totalPrice } = req.body;
   
-    console.log()
     const line_items = items.map(item => ({
       price_data: {
         currency: 'inr',

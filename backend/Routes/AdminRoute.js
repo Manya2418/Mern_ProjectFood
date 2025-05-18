@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken'
 import Admin from '../model/adminSchema.js';
 import User from '../model/UserSchema.js';
 import Order from '../model/orderSchema.js';
+import Fooditem from '../model/RestaurantSchema.js';
+import MenuItem from '../model/MenuItemSchema.js';
 const router=express.Router();
 
 router.post('/signup', async (req, res) => {
@@ -66,6 +68,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
 router.get('/alluser', async (req,res)=>{
     try {
         const users = await User.find();
@@ -98,7 +101,6 @@ router.get('/allorder', async (req,res)=>{
 
 router.put('/update', async (req, res) => {
     const { adminId } = req.query;
-    console.log(adminId)
     const { name, email } = req.body;
   
     try {
@@ -126,5 +128,40 @@ router.put('/update', async (req, res) => {
   });
 
 
+  router.get('/:id', async (req, res) => {
+    try {
+        const admin = await Admin.findById(req.params.id).select('-password');
+        if (!admin) {
+            return res.status(404).json({ message: 'Admin not found' });
+        }
+        res.json(admin);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).json({ message: 'Server error' });
+    }
+  });
+
+  router.post('/add-menu-item', async (req, res) => {
+    try {
+      const { restaurantId, name, description, imageUrl, price, inStock } = req.body;
+  
+      const newItem = new MenuItem({
+        restaurantId,
+        name,
+        description,
+        imageUrl,
+        price,
+        inStock
+      });
+  
+      await newItem.save();
+  
+      res.status(201).json({ message: 'Menu Item created successfully!', menuItem: newItem });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to create menu item', error: error.message });
+    }
+  });
+  
+  
 
 export default router;
