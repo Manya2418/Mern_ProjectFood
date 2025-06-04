@@ -1,4 +1,5 @@
-module.exports = {
+
+odule.exports = {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
